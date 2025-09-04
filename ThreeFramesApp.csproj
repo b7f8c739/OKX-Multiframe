@@ -1,0 +1,50 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <!-- Use WinForms (not WPF) -->
+  <PropertyGroup>
+    <AssemblyName>OKXMultichart</AssemblyName>
+    <RootNamespace>OKXMultichart</RootNamespace>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <UseWindowsForms>true</UseWindowsForms>
+    <!-- Optional: make the app DPI‑aware -->
+    <EnableWindowsFormsHighDpiAutoResizing>true</EnableWindowsFormsHighDpiAutoResizing>
+    <EnableDefaultEmbeddedResourceItems>false</EnableDefaultEmbeddedResourceItems>
+    <ApplicationIcon>image.ico</ApplicationIcon>
+  </PropertyGroup>
+
+  <!-- Bring in the latest WebView2 package that targets net6 -->
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.2277.86" />
+    <Reference Remove="Microsoft.Web.WebView2.Wpf" />
+    <EmbeddedResource Include="Resources.resx" />
+    <EmbeddedResource Include="runtimes\win-x64\native\WebView2Loader.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="image.ico">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory> <!-- Prevent copying -->
+    </None>
+  </ItemGroup>
+
+<PropertyGroup>
+  <!-- Target Windows 64‑bit -->
+  <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+
+  <!-- Bundle everything into one file -->
+  <PublishSingleFile>true</PublishSingleFile>
+
+  <!-- Include the .NET runtime inside the bundle -->
+  <SelfContained>true</SelfContained>
+
+  <!-- Trim unused framework bits (makes the exe smaller) -->
+  <PublishTrimmed>false</PublishTrimmed>
+
+  <!-- Optional: make the exe launch without a console window -->
+  <OutputType>WinExe</OutputType>
+
+</PropertyGroup>
+<PropertyGroup>
+  <!-- Existing properties … -->
+  <IncludeWebView2Runtime>true</IncludeWebView2Runtime>
+</PropertyGroup>
+</Project>
